@@ -57,7 +57,7 @@ const checkwinner =()=>{
             if(pos1value==pos2value && pos2value==pos3value)
             {
                 console.log("winner is ",pos1value);
-                showwinner(pos1value);
+                showwinner(pos1value, pattern);
                 return true;
             } 
             
@@ -67,13 +67,26 @@ const checkwinner =()=>{
     }
 }
 
-const showwinner=(winner)=>{
+const showwinner=(winner, winningPattern)=>{
    msg.innerText=`Congratulations, winner  is ${winner}`;
+   highlightWinningBoxes(winningPattern);
    disablebox();
    msgbox.classList.remove("hide");
    resetbtn.classList.add("hide");
    headerh1.classList.remove("headerstyle");
   
+}
+
+const highlightWinningBoxes = (pattern) => {
+    pattern.forEach((index) => {
+        boxes[index].classList.add("winner-highlight");
+    });
+}
+
+const removeHighlight = () => {
+    boxes.forEach((box) => {
+        box.classList.remove("winner-highlight");
+    });
 }
 
 const disablebox =()=>{
@@ -95,6 +108,7 @@ const enablebox =()=>{
 const reset=()=>{
     turno=true;
      enablebox();
+     removeHighlight();
      count=0;
     
 }
@@ -103,6 +117,7 @@ const newgame=()=>{
     turno=true;
     count=0;
      enablebox();
+     removeHighlight();
      msgbox.classList.add("hide");
      resetbtn.classList.remove("hide");
      headerh1.classList.add("headerstyle");
@@ -119,5 +134,3 @@ const gamedraw=()=>{
    resetbtn.classList.add("hide");
    headerh1.classList.remove("headerstyle");
 }
-
-
